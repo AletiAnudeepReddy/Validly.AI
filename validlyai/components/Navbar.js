@@ -2,6 +2,7 @@
 import { Bot } from "lucide-react";
 import { useState } from "react";
 import AuthModal from "@/components/AuthModal";
+import Link from "next/link";
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -12,6 +13,7 @@ export default function Navbar() {
     <>
       <nav className="flex sticky z-10 top-0 justify-between items-center h-16 px-6 bg-[#10151D]/99  text-white shadow-xl">
         {/* Left: Logo + Brand Name */}
+        <Link href={"/"}>
         <div className="flex items-center gap-2">
           <span data-aos="fade-left" data-aos-delay="100" className="text-2xl">
             <Bot className="w-7 h-7 text-[#12EAB5]" />
@@ -20,12 +22,15 @@ export default function Navbar() {
             Validly.AI
           </span>
         </div>
+        </Link>
 
         {/* Right: Links */}
         <div className="flex items-center gap-6">
           {!isLoggedIn ? (
             <>
+            <Link href={"/about"}>
               <button data-aos="fade-right" data-aos-delay="300" className="hover:text-[#12EAB5] hover:scale-105 transition">About</button>
+              </Link>
               <button
                 data-aos="fade-right"
                 data-aos-delay="200"

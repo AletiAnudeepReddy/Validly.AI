@@ -1,5 +1,6 @@
 "use client"
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -23,10 +24,12 @@ export default function Home() {
           data-aos-delay="300" className="bg-[#12EAB5] hover:scale-105 text-black px-6 py-3 rounded hover:opacity-90 transition font-medium">
           Validate My Idea
         </button>
+        <Link href={"/about"}>
         <button data-aos="fade-left"
           data-aos-delay="300" className="border hover:scale-105 border-[#12EAB5] px-6 py-3 rounded text-[#12EAB5] hover:bg-[#12EAB5]/10 transition font-medium">
           How It Works
         </button>
+        </Link>
       </div>
 
       {/* Why Validly.AI Section */}

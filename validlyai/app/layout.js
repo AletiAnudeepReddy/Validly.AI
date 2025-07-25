@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 import { useEffect } from "react";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({ children }) {
       >
       <Navbar/>
         {children}
+      <Footer/>
       </body>
     </html>
   );

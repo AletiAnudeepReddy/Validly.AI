@@ -16,7 +16,7 @@ export default function AboutPage() {
         </section>
 
         {/* Why it matters */}
-        <div className='flex md:justify-between flex-col md:flex-row items-center md:gap-50 gap-10'>
+        <div className='flex md:justify-between border-t border-[#253445]  pt-7 flex-col md:flex-row items-center md:gap-50 gap-10'>
         <section data-aos="fade-right" data-aos-delay="100" className="space-y-4 w-[50%]">
           <h2 className="text-2xl font-semibold text-[#12EAB5]">🌍 Why Validly.ai Matters</h2>
           <p className="text-gray-400 text-lg">
@@ -112,7 +112,7 @@ export default function AboutPage() {
         </section>
 
         {/* CTA */}
-        <section className="text-center pt-5">
+        <section className="text-center pt-5 border-t border-[#1E2A37] ">
           <h3 className="text-xl text-white font-semibold mb-2">Ready to validate your next big idea?</h3>
           <a href="/validate" className="inline-block bg-[#12EAB5] text-[#10151D] px-6 py-3 rounded-lg font-semibold hover:bg-teal-400 transition">
             Try Validly Now
