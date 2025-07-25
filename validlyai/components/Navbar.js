@@ -8,30 +8,38 @@ export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <nav className="flex justify-between items-center h-16 px-6 bg-[#10151D] text-white shadow-md">
+    <nav className="flex sticky z-10 top-0 justify-between items-center h-16 px-6 bg-[#10151D]  text-white shadow-xl">
       {/* Left: Logo + Brand Name */}
       <div className="flex items-center gap-2">
-        <span className="text-2xl"><Bot className="w-6 h-6 text-[#12EAB5]" /></span>
-        <span className="font-bold text-lg tracking-wide">Validly.AI</span>
+        <span data-aos="fade-left"
+          data-aos-delay="100" className="text-2xl"><Bot className="w-7 h-7 text-[#12EAB5]" /></span>
+        <span data-aos="fade-left"
+          data-aos-delay="200" className="font-bold text-xl tracking-wide">Validly.AI</span>
       </div>
 
       {/* Right: Links (change based on login state) */}
       <div className="flex items-center gap-6">
         {!isLoggedIn ? (
           <>
-            <button className="hover:text-[#12EAB5] transition">About</button>
-            <button className="hover:text-[#12EAB5] transition">Login</button>
-            <button className="bg-[#12EAB5] text-black px-4 py-1 rounded hover:opacity-90 transition">
+            <button data-aos="fade-right"
+          data-aos-delay="300" className="hover:text-[#12EAB5] hover:scale-105 transition">About</button>
+            <button data-aos="fade-right"
+          data-aos-delay="200" className="hover:text-[#12EAB5] hover:scale-105 transition">Login</button>
+            <button data-aos="fade-right"
+          data-aos-delay="100" className="bg-[#12EAB5] hover:scale-105 text-black px-4 py-1 rounded hover:opacity-90 transition">
               Sign Up
             </button>
           </>
         ) : (
           <>
-            <button className="hover:text-[#12EAB5] transition">Dashboard</button>
-            <button className="hover:text-[#12EAB5] transition">Insights</button>
-            <button
+            <button data-aos="fade-right"
+          data-aos-delay="300" className="hover:text-[#12EAB5] hover:scale-105 transition">Dashboard</button>
+            <button data-aos="fade-right"
+          data-aos-delay="200" className="hover:text-[#12EAB5] hover:scale-105 transition">Insights</button>
+            <button data-aos="fade-right"
+          data-aos-delay="100"
               onClick={() => setIsLoggedIn(false)}
-              className="text-red-400 hover:text-red-300 transition"
+              className="text-red-400 hover:scale-105 hover:text-red-300 transition"
             >
               Logout
             </button>
