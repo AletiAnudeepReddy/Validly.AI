@@ -30,7 +30,7 @@ export default function Home() {
       </div>
 
       {/* Why Validly.AI Section */}
-      <section className="max-w-5xl w-full mt-20 grid sm:grid-cols-2 gap-8 px-2 text-gray-300">
+      <section className="max-w-5xl w-full mt-18 grid sm:grid-cols-2 gap-8 px-2 text-gray-300">
         <Card
           icon="🤖"
           title="Let AI do the research"

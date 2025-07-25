@@ -1,51 +1,66 @@
 "use client";
 import { Bot } from "lucide-react";
-
 import { useState } from "react";
+import AuthModal from "@/components/AuthModal";
 
 export default function Navbar() {
-  // Simulated login state (replace with real auth logic later)
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
 
   return (
-    <nav className="flex sticky z-10 top-0 justify-between items-center h-16 px-6 bg-[#10151D]  text-white shadow-xl">
-      {/* Left: Logo + Brand Name */}
-      <div className="flex items-center gap-2">
-        <span data-aos="fade-left"
-          data-aos-delay="100" className="text-2xl"><Bot className="w-7 h-7 text-[#12EAB5]" /></span>
-        <span data-aos="fade-left"
-          data-aos-delay="200" className="font-bold text-xl tracking-wide">Validly.AI</span>
-      </div>
+    <>
+      <nav className="flex sticky z-10 top-0 justify-between items-center h-16 px-6 bg-[#10151D]  text-white shadow-xl">
+        {/* Left: Logo + Brand Name */}
+        <div className="flex items-center gap-2">
+          <span data-aos="fade-left" data-aos-delay="100" className="text-2xl">
+            <Bot className="w-7 h-7 text-[#12EAB5]" />
+          </span>
+          <span data-aos="fade-left" data-aos-delay="200" className="font-bold text-xl tracking-wide">
+            Validly.AI
+          </span>
+        </div>
 
-      {/* Right: Links (change based on login state) */}
-      <div className="flex items-center gap-6">
-        {!isLoggedIn ? (
-          <>
-            <button data-aos="fade-right"
-          data-aos-delay="300" className="hover:text-[#12EAB5] hover:scale-105 transition">About</button>
-            <button data-aos="fade-right"
-          data-aos-delay="200" className="hover:text-[#12EAB5] hover:scale-105 transition">Login</button>
-            <button data-aos="fade-right"
-          data-aos-delay="100" className="bg-[#12EAB5] hover:scale-105 text-black px-4 py-1 rounded hover:opacity-90 transition">
-              Sign Up
-            </button>
-          </>
-        ) : (
-          <>
-            <button data-aos="fade-right"
-          data-aos-delay="300" className="hover:text-[#12EAB5] hover:scale-105 transition">Dashboard</button>
-            <button data-aos="fade-right"
-          data-aos-delay="200" className="hover:text-[#12EAB5] hover:scale-105 transition">Insights</button>
-            <button data-aos="fade-right"
-          data-aos-delay="100"
-              onClick={() => setIsLoggedIn(false)}
-              className="text-red-400 hover:scale-105 hover:text-red-300 transition"
-            >
-              Logout
-            </button>
-          </>
-        )}
-      </div>
-    </nav>
+        {/* Right: Links */}
+        <div className="flex items-center gap-6">
+          {!isLoggedIn ? (
+            <>
+              <button data-aos="fade-right" data-aos-delay="300" className="hover:text-[#12EAB5] hover:scale-105 transition">About</button>
+              <button
+                data-aos="fade-right"
+                data-aos-delay="200"
+                onClick={() => setShowLogin(true)}
+                className="hover:text-[#12EAB5] hover:scale-105 transition"
+              >
+                Login
+              </button>
+              <button
+                data-aos="fade-right"
+                data-aos-delay="100"
+                onClick={() => setShowSignup(true)}
+                className="bg-[#12EAB5] hover:scale-105 text-black px-4 py-1 rounded hover:opacity-90 transition"
+              >
+                Sign Up
+              </button>
+            </>
+          ) : (
+            <>
+              <button className="hover:text-[#12EAB5] hover:scale-105 transition">Dashboard</button>
+              <button className="hover:text-[#12EAB5] hover:scale-105 transition">Insights</button>
+              <button
+                onClick={() => setIsLoggedIn(false)}
+                className="text-red-400 hover:scale-105 hover:text-red-300 transition"
+              >
+                Logout
+              </button>
+            </>
+          )}
+        </div>
+      </nav>
+
+      {/* Modals */}
+      <AuthModal isOpen={showLogin} setIsOpen={setShowLogin} type="login" />
+      <AuthModal isOpen={showSignup} setIsOpen={setShowSignup} type="signup" />
+    </>
   );
 }
