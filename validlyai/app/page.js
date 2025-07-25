@@ -70,7 +70,7 @@ function Card({ icon, title, desc }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="bg-[#10151D] p-6 rounded-xl border border-[#1E2A37] hover:shadow-[0_0_20px_#12EAB540] transition hover:scale-[1.02]"
+      className="bg-[#10151D]/99 p-6 rounded-xl border-[0.5px] border-[#12EAB540]/60 hover:shadow-[0_0_20px_#12EAB540] transition hover:scale-[1.02]"
     >
       <div data-aos="zoom-in"
           data-aos-delay="200" className="text-3xl mb-3">{icon}</div>

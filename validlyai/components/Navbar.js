@@ -10,7 +10,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="flex sticky z-10 top-0 justify-between items-center h-16 px-6 bg-[#10151D]  text-white shadow-xl">
+      <nav className="flex sticky z-10 top-0 justify-between items-center h-16 px-6 bg-[#10151D]/99  text-white shadow-xl">
         {/* Left: Logo + Brand Name */}
         <div className="flex items-center gap-2">
           <span data-aos="fade-left" data-aos-delay="100" className="text-2xl">
