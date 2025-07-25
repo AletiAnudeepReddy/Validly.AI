@@ -4,6 +4,7 @@ import { Fragment, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { IoClose, IoMailOutline, IoLockClosedOutline, IoPersonOutline } from 'react-icons/io5';
 import { motion, AnimatePresence } from 'framer-motion';
+import { signIn } from "next-auth/react";
 
 export default function AuthModal({ isOpen, setIsOpen }) {
   const [isLogin, setIsLogin] = useState(true);
@@ -107,7 +108,7 @@ export default function AuthModal({ isOpen, setIsOpen }) {
                 {/* Google Auth */}
                 <button
                   className="w-full py-2 border border-gray-700 rounded flex items-center justify-center gap-3 hover:bg-white/10 transition"
-                  onClick={() => alert('Trigger Google Auth')}
+                  onClick={() => signIn("google")}
                 >
                   <FcGoogle size={22} />
                   <span>Continue with Google</span>
