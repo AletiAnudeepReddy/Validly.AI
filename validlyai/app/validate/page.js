@@ -5,7 +5,7 @@ import { useState } from 'react';
 import StartupForm from '@/components/StartupForm';
 import SWOTAnalysis from '@/components/SWOTAnalysis';
 import CompetitorResearch from '@/components/CompetitorResearch';
-//import TrendInsights from '@/components/TrendInsights';
+import TrendInsights from '@/components/TrendInsights';
 //import Dashboard from '@/components/Dashboard';
 
 export default function ValidateIdeaPage() {
@@ -27,6 +27,7 @@ export default function ValidateIdeaPage() {
       <StartupForm onSubmit={(data) => setIdeaData(data)} />
       <SWOTAnalysis/>
       <CompetitorResearch/>
+      <TrendInsights idea={ideaData} />
 
       {ideaData && (
         {/*<>
