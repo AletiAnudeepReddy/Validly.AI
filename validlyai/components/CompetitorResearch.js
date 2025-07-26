@@ -36,11 +36,13 @@ export default function CompetitorResearch() {
     <section
       className="mt-5 max-w-7xl bg-[#10151D] p-6 rounded-2xl shadow-xl border border-[#1E293B]"
     >
-      <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+      <h2 data-aos="fade-down"
+        data-aos-delay="100" className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
         <FaRocket className="text-[#12EAB5]" /> Competitor Research
       </h2>
 
-      <p className="text-sm text-gray-300 mb-6">
+      <p data-aos="zoom-out"
+        data-aos-delay="100" className="text-sm text-gray-300 mb-6">
         We have found similar platforms in the market. Here is how they compare.
       </p>
 
@@ -48,6 +50,8 @@ export default function CompetitorResearch() {
   {competitors.map((comp, idx) => (
     <div
       key={idx}
+      data-aos="zoom-in"
+        data-aos-delay="100"
       className="relative bg-gradient-to-br from-[#10131a] to-[#0c0f15] p-5 rounded-xl border border-[#1a1f2b] shadow-md hover:shadow-[0_0_20px_#12EAB5aa] hover:border-[#12EAB5] transition-all duration-300"
     >
       {/* Visit button at top-right */}

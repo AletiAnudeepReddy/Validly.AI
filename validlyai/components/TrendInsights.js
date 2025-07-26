@@ -52,7 +52,8 @@ const TrendInsights = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         {/* Line Chart */}
-        <div className="bg-[#11141b] p-4 rounded-2xl shadow-lg">
+        <div data-aos="zoom-in"
+        data-aos-delay="00" className="bg-[#11141b] p-4 rounded-2xl shadow-lg">
           <h3 className="text-lg font-semibold mb-2">📈 Search Interest Over Time</h3>
           <ResponsiveContainer width="100%" height={250}>
             <LineChart data={trendData}>
@@ -66,7 +67,8 @@ const TrendInsights = () => {
         </div>
 
         {/* Bar Chart */}
-        <div className="bg-[#11141b] p-4 rounded-2xl shadow-lg">
+        <div data-aos="zoom-in" className="bg-[#11141b] p-4 rounded-2xl shadow-lg">
+        
           <h3 className="text-lg font-semibold mb-2">📊 Top Growing Sectors</h3>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={sectorGrowth}>
@@ -80,7 +82,7 @@ const TrendInsights = () => {
         </div>
 
         {/* Pie Chart */}
-        <div className="bg-[#11141b] p-4 rounded-2xl shadow-lg col-span-1 md:col-span-2">
+        <div data-aos="zoom-in" className="bg-[#11141b] p-4 rounded-2xl shadow-lg col-span-1 md:col-span-2">
           <h3 className="text-lg font-semibold mb-2">🥧 Market Share of AI Applications</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
