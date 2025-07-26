@@ -25,20 +25,22 @@ export default function StartupForm({ onSubmit }) {
     };
 
     const inputClass =
-        'w-full p-2 bg-[#10151D] border border-[#1E2A37] text-gray-400 placeholder-gray-500 rounded-md focus:outline-none focus:ring-[0.1px] focus:ring-[#12EAB5] focus:border-[#12EAB5] text-sm';
+        'w-full p-2 bg-[#10151D] border-[1.5px] border-[#1E2A37] text-gray-400 placeholder-gray-500 rounded-md focus:outline-none focus:ring-[0.1px] focus:ring-[#12EAB5] focus:border-[#12EAB5] text-sm';
 
     const labelClass = 'block mb-1 font-medium text-gray-300 flex items-center gap-2';
 
     return (
-        <div className="max-w-5xl mx-auto bg-[#0C0F15] shadow-md rounded-xl p-6 border border-[#1E2A37] h-[46vh] overflow-y-auto text-sm">
+        <div className="max-w-5xl mx-auto bg-[#0C0F15] shadow-md rounded-xl p-6 border-2 border-[#1E2A37] h-[46vh] overflow-y-auto text-sm">
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Left Column */}
                 <div className="space-y-3">
                     <div>
-                        <label className={labelClass}>
+                        <label data-aos="fade-right"
+                data-aos-delay="200" className={labelClass}>
                             <Lightbulb className="w-4 h-4 text-[#12EAB5]" /> Startup Name
                         </label>
-                        <input
+                        <input data-aos="zoom-in"
+                data-aos-delay="200"
                             type="text"
                             name="name"
                             required
@@ -50,10 +52,13 @@ export default function StartupForm({ onSubmit }) {
                     </div>
 
                     <div>
-                        <label className={labelClass}>
+                        <label data-aos="fade-right"
+                data-aos-delay="300" className={labelClass}>
                             <Info className="w-4 h-4 text-[#12EAB5]" /> One-liner Description
                         </label>
                         <input
+                        data-aos="zoom-in"
+                data-aos-delay="300"
                             type="text"
                             name="description"
                             required
@@ -65,10 +70,12 @@ export default function StartupForm({ onSubmit }) {
                     </div>
 
                     <div>
-                        <label className={labelClass}>
+                        <label data-aos="fade-right"
+                data-aos-delay="400" className={labelClass}>
                             <Users className="w-4 h-4 text-[#12EAB5]" /> Target Audience
                         </label>
-                        <input
+                        <input data-aos="zoom-in"
+                data-aos-delay="400"
                             type="text"
                             name="audience"
                             required
@@ -83,10 +90,12 @@ export default function StartupForm({ onSubmit }) {
                 {/* Right Column */}
                 <div className="space-y-3">
                     <div>
-                        <label className={labelClass}>
+                        <label data-aos="fade-right"
+                data-aos-delay="450" className={labelClass}>
                             <AlertCircle className="w-4 h-4 text-[#12EAB5]" /> Problem It Solves
                         </label>
-                        <textarea
+                        <textarea data-aos="zoom-in"
+                data-aos-delay="450"
                             name="problem"
                             required
                             value={formData.problem}
@@ -98,10 +107,12 @@ export default function StartupForm({ onSubmit }) {
                     </div>
 
                     <div>
-                        <label className={labelClass}>
+                        <label data-aos="fade-right"
+                data-aos-delay="550" className={labelClass}>
                             <Star className="w-4 h-4 text-[#12EAB5]" /> Key Features
                         </label>
-                        <textarea
+                        <textarea data-aos="zoom-in"
+                data-aos-delay="550"
                             name="features"
                             required
                             value={formData.features}
@@ -116,7 +127,8 @@ export default function StartupForm({ onSubmit }) {
                 <div className=" col-span-1 md:col-span-2">
 
 
-                    <button
+                    <button data-aos="fade-down"
+                data-aos-delay="200"
                         type="submit"
                         className="w-full flex items-center justify-center gap-2 py-2 text-sm bg-gradient-to-r from-[#12EAB5] to-[#0EDDB8] text-black rounded-2xl hover:scale-102 transition duration-200 font-semibold shadow-md hover:shadow-lg"
                     >
