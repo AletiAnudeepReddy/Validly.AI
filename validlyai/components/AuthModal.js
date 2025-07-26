@@ -4,16 +4,61 @@ import { Fragment, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { IoClose, IoMailOutline, IoLockClosedOutline, IoPersonOutline } from 'react-icons/io5';
 import { motion, AnimatePresence } from 'framer-motion';
-import { signIn } from "next-auth/react";
+import { signIn } from 'next-auth/react';
 
 export default function AuthModal({ isOpen, setIsOpen }) {
   const [isLogin, setIsLogin] = useState(true);
+  const [fullname, setFullname] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const toggleMode = () => {
-  setTimeout(() => {
-    setIsLogin(!isLogin);
-  }, 250);
-};
+    setTimeout(() => {
+      setIsLogin(!isLogin);
+    }, 250);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const endpoint = isLogin ? '/api/login' : '/api/signup';
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        body: JSON.stringify({
+          fullname,
+          email,
+          password,
+        }),
+        headers: { 'Content-Type': 'application/json' },
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.message || 'Something went wrong');
+        setLoading(false);
+        return;
+      }
+
+      alert(data.message);
+      setIsOpen(false);
+
+      // Optionally log them in or refresh session
+      if (isLogin) {
+        await signIn('credentials', { email, password });
+      }
+
+    } catch (error) {
+      console.error(error);
+      alert('Something went wrong');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -65,6 +110,7 @@ export default function AuthModal({ isOpen, setIsOpen }) {
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.4 }}
                     className="space-y-4"
+                    onSubmit={handleSubmit}
                   >
                     {!isLogin && (
                       <div className="relative">
@@ -72,7 +118,9 @@ export default function AuthModal({ isOpen, setIsOpen }) {
                         <input
                           type="text"
                           placeholder="Full Name"
-                          className="w-full pl-10 pr-4 py-2 rounded bg-[#10151D] border-[1px] border-[#1E2A37] placeholder-gray-400 focus:outline-none focus:ring-[0.1px] focus:ring-[#12EAB5] focus:border-[#12EAB5] transition"
+                          value={fullname}
+                          onChange={(e) => setFullname(e.target.value)}
+                          className="w-full pl-10 pr-4 py-2 rounded bg-[#10151D] border border-[#1E2A37] placeholder-gray-400 focus:outline-none focus:ring-[0.1px] focus:ring-[#12EAB5] focus:border-[#12EAB5]"
                         />
                       </div>
                     )}
@@ -81,7 +129,9 @@ export default function AuthModal({ isOpen, setIsOpen }) {
                       <input
                         type="email"
                         placeholder="Email"
-                        className="w-full pl-10 pr-4 py-2 rounded bg-[#10151D] border-[1px] border-[#1E2A37] placeholder-gray-400 focus:outline-none focus:ring-[0.1px] focus:ring-[#12EAB5] focus:border-[#12EAB5] transition"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="w-full pl-10 pr-4 py-2 rounded bg-[#10151D] border border-[#1E2A37] placeholder-gray-400 focus:outline-none focus:ring-[0.1px] focus:ring-[#12EAB5] focus:border-[#12EAB5]"
                       />
                     </div>
                     <div className="relative">
@@ -89,15 +139,18 @@ export default function AuthModal({ isOpen, setIsOpen }) {
                       <input
                         type="password"
                         placeholder="Password"
-                        className="w-full pl-10 pr-4 py-2 rounded bg-[#10151D] border-[1px] border-[#1E2A37] placeholder-gray-400 focus:outline-none focus:ring-[0.1px] focus:ring-[#12EAB5] focus:border-[#12EAB5] transition"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className="w-full pl-10 pr-4 py-2 rounded bg-[#10151D] border border-[#1E2A37] placeholder-gray-400 focus:outline-none focus:ring-[0.1px] focus:ring-[#12EAB5] focus:border-[#12EAB5]"
                       />
                     </div>
 
                     <button
                       type="submit"
+                      disabled={loading}
                       className="w-full py-2 bg-[#12EAB5] text-black rounded hover:opacity-90 transition font-medium"
                     >
-                      {isLogin ? 'Login' : 'Sign Up'}
+                      {loading ? 'Processing...' : isLogin ? 'Login' : 'Sign Up'}
                     </button>
                   </motion.form>
                 </AnimatePresence>
@@ -108,13 +161,13 @@ export default function AuthModal({ isOpen, setIsOpen }) {
                 {/* Google Auth */}
                 <button
                   className="w-full py-2 border border-gray-700 rounded flex items-center justify-center gap-3 hover:bg-white/10 transition"
-                  onClick={() => signIn("google")}
+                  onClick={() => signIn('google')}
                 >
                   <FcGoogle size={22} />
                   <span>Continue with Google</span>
                 </button>
 
-                {/* Switch between Login/Signup */}
+                {/* Switch */}
                 <p className="mt-6 text-sm text-center text-gray-400">
                   {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
                   <button onClick={toggleMode} className="text-[#12EAB5] font-medium hover:underline">
