@@ -1,22 +1,35 @@
 "use client";
 import { Bot } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthModal from "@/components/AuthModal";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
-import { useRouter } from "next/navigation"; // for App Router
-
-
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
- const router = useRouter();
+  const router = useRouter();
   const { data: session } = useSession();
   const isLoggedIn = !!session;
 
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  // Optional: delay to show loader for at least 500ms
+  const showLoader = () => {
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 1000);
+  };
+
   return (
     <>
+      {/* Loader */}
+      {isLoading && (
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-60 flex items-center justify-center">
+          <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-20 w-20"></div>
+        </div>
+      )}
+
       <nav className="flex sticky z-10 top-0 justify-between items-center h-16 px-6 bg-[#10151D]/99  text-white shadow-xl">
         {/* Left: Logo + Brand Name */}
         <Link href={"/"}>
@@ -57,16 +70,16 @@ export default function Navbar() {
           ) : (
             <>
               <button data-aos="fade-right" data-aos-delay="300" className="hover:text-[#12EAB5] hover:scale-105 transition">Dashboard</button>
-              <button data-aos="fade-right"
-                data-aos-delay="200" className="hover:text-[#12EAB5] hover:scale-105 transition">Insights</button>
+              <button data-aos="fade-right" data-aos-delay="200" className="hover:text-[#12EAB5] hover:scale-105 transition">Insights</button>
               <button
-              data-aos="fade-right"
+                data-aos="fade-right"
                 data-aos-delay="100"
-                onClick={() => {
-                  signOut({ redirect: false });
+                onClick={async () => {
+                  showLoader();
+                  await signOut({ redirect: false });
                   router.push("/");
                 }}
-                className=" bg-red-400  hover:scale-105 text-black px-4 py-1 rounded hover:opacity-90 transition"
+                className="bg-red-400 hover:scale-105 text-black px-4 py-1 rounded hover:opacity-90 transition"
               >
                 Logout
               </button>

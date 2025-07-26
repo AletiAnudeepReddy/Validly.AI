@@ -1,1 +1,12 @@
 @import "tailwindcss";
+/* Loader Spinner */
+.loader {
+  border-top-color: #12EAB5;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
