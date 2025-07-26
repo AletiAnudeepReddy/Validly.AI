@@ -70,7 +70,7 @@ export default function DashboardPage() {
 
         {recentIdeas.length === 0 ? (
           <p data-aos="fade-up"
-        data-aos-delay="300" className="text-gray-400">You haven't submitted any startup ideas yet.</p>
+        data-aos-delay="300" className="text-gray-400">You have not submitted any startup ideas yet.</p>
         ) : (
           <div className="space-y-4">
             {recentIdeas.map((idea) => (

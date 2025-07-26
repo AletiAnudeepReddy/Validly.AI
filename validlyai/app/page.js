@@ -20,10 +20,12 @@ export default function Home() {
 
       {/* CTA Button */}
       <div className="flex gap-4 mt-8">
+      <Link href={"/validate"}>
         <button data-aos="fade-right"
           data-aos-delay="300" className="bg-[#12EAB5] hover:scale-105 text-black px-6 py-3 rounded hover:opacity-90 transition font-medium">
           Validate My Idea
         </button>
+        </Link>
         <Link href={"/about"}>
         <button data-aos="fade-left"
           data-aos-delay="300" className="border hover:scale-105 border-[#12EAB5] px-6 py-3 rounded text-[#12EAB5] hover:bg-[#12EAB5]/10 transition font-medium">

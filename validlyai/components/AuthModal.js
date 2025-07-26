@@ -20,13 +20,16 @@ export default function AuthModal({ isOpen, setIsOpen }) {
   const toggleMode = () => {
     setTimeout(() => {
       setIsLogin(!isLogin);
+      setFullname('');
+      setEmail('');
+      setPassword('');
     }, 250);
   };
 
   const notify = (message, type = 'default') => {
     toast(message, {
       position: "top-right",
-      autoClose: 4000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -64,6 +67,9 @@ export default function AuthModal({ isOpen, setIsOpen }) {
       }
 
       notify(data.message, 'success');
+      setFullname('');
+      setEmail('');
+      setPassword('');
 
       // Optionally log them in or refresh session
       if (isLogin) {
@@ -74,8 +80,9 @@ export default function AuthModal({ isOpen, setIsOpen }) {
         });
 
         if (res.ok) {
+          router.push('/validate');
           setIsOpen(false);
-          router.push('/');
+
         } else {
           notify('Invalid email or password', 'error');
         }
@@ -121,7 +128,7 @@ export default function AuthModal({ isOpen, setIsOpen }) {
                 leaveTo="opacity-0 scale-90"
               >
                 <Dialog.Panel className="w-full max-w-md max-h-[90vh] overflow-y-auto transform rounded-2xl bg-[#0C0F15] p-6 text-left align-middle shadow-xl transition-all border border-[#1E2A37] relative">
-                  
+
                   <button
                     onClick={() => setIsOpen(false)}
                     className="absolute top-3 right-3 text-gray-400 hover:text-white transition"
@@ -190,7 +197,7 @@ export default function AuthModal({ isOpen, setIsOpen }) {
 
                   <button
                     className="w-full py-2 border border-gray-700 rounded flex items-center justify-center gap-3 hover:bg-white/10 transition"
-                    onClick={() => signIn('google')}
+                    onClick={() => signIn('google', { callbackUrl: '/validate' })}
                   >
                     <FcGoogle size={22} />
                     <span>Continue with Google</span>

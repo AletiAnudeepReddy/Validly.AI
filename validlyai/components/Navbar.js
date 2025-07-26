@@ -69,8 +69,10 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <button data-aos="fade-right" data-aos-delay="300" className="hover:text-[#12EAB5] hover:scale-105 transition">Dashboard</button>
+              <button data-aos="fade-right" data-aos-delay="300" className="hover:text-[#12EAB5] hover:scale-105 transition">SWOT</button>
+              <button data-aos="fade-right" data-aos-delay="250" className="hover:text-[#12EAB5] hover:scale-105 transition">Competitors</button>
               <button data-aos="fade-right" data-aos-delay="200" className="hover:text-[#12EAB5] hover:scale-105 transition">Insights</button>
+              <button data-aos="fade-right" data-aos-delay="150" className="hover:text-[#12EAB5] hover:scale-105 transition">Dashboard</button>
               <button
                 data-aos="fade-right"
                 data-aos-delay="100"
