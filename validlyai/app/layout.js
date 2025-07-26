@@ -1,12 +1,13 @@
-"use client"
+"use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { useEffect } from "react";
 import Footer from "@/components/Footer";
 import { SessionProvider } from "next-auth/react";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,24 +19,23 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
-
 export default function RootLayout({ children }) {
   useEffect(() => {
     AOS.init({
       duration: 900,
       easing: 'ease-in-out',
       once: true,
-    })
-  }, [])
+    });
+  }, []);
+
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-      <Navbar/>
-        <SessionProvider>{children}</SessionProvider>
-      <Footer/>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <SessionProvider>
+          <Navbar />
+          {children}
+        </SessionProvider>
+        <Footer />
       </body>
     </html>
   );

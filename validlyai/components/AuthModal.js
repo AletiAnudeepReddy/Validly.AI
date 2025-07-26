@@ -5,8 +5,10 @@ import { FcGoogle } from 'react-icons/fc';
 import { IoClose, IoMailOutline, IoLockClosedOutline, IoPersonOutline } from 'react-icons/io5';
 import { motion, AnimatePresence } from 'framer-motion';
 import { signIn } from 'next-auth/react';
+import { useRouter } from "next/navigation";
 
 export default function AuthModal({ isOpen, setIsOpen }) {
+  const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
   const [fullname, setFullname] = useState('');
   const [email, setEmail] = useState('');
@@ -49,8 +51,20 @@ export default function AuthModal({ isOpen, setIsOpen }) {
 
       // Optionally log them in or refresh session
       if (isLogin) {
-        await signIn('credentials', { email, password });
+        const res = await signIn('credentials', {
+          redirect: false,
+          email,
+          password,
+        });
+
+        if (res.ok) {
+          setIsOpen(false);
+          router.push('/');
+        } else {
+          alert('Invalid email or password');
+        }
       }
+
 
     } catch (error) {
       console.error(error);
