@@ -1,42 +1,20 @@
-// /app/api/swot/route.js
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 
 export async function POST(req) {
   try {
-    const body = await req.json();
-    const { name, description, problem, audience, features } = body;
+    const { name, description, problem, audience, features } = await req.json();
+    const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API }); // your key env
 
-    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const result = await ai.models.generateContent({
+      model: "gemini-2.5-flash",  // or "gemini‑2.0‑flash" depending on availability
+      contents: `Act as a business analyst. Provide a SWOT as JSON: { strengths, weaknesses, opportunities, threats }. \n\nStartup Name: ${name}\nDescription: ${description}\nProblem: ${problem}\nAudience: ${audience}\nFeatures: ${features}`
+    });
 
-    const prompt = `
-Act as a business analyst. Analyze the following startup idea and give a SWOT analysis. 
-Respond ONLY in JSON format with the keys: strengths, weaknesses, opportunities, threats.
-
-Startup Name: ${name}
-Description: ${description}
-Problem it Solves: ${problem}
-Target Audience: ${audience}
-Key Features: ${features}
-    `;
-
-    const result = await model.generateContent(prompt);
-    const text = result.response.text();
-
-    // Some Gemini responses may wrap JSON in triple backticks or markdown. Try parsing it safely.
-    const jsonText = text
-      .replace(/```json/g, "")
-      .replace(/```/g, "")
-      .trim();
-
-    const swot = JSON.parse(jsonText);
-
+    const cleanedText = result.text.trim().replace(/^```json|```$/g, "").trim();
+const swot = JSON.parse(cleanedText);
     return Response.json(swot);
   } catch (err) {
     console.error("SWOT API error:", err);
-    return new Response(
-      JSON.stringify({ error: "Failed to generate SWOT analysis" }),
-      { status: 500 }
-    );
+    return new Response(JSON.stringify({ error: "Failed to generate SWOT analysis" }), { status: 500 });
   }
 }
