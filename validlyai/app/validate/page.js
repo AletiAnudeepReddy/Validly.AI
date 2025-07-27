@@ -11,6 +11,7 @@ import SWOTCharts from '@/components/SWOTCharts';
 
 export default function ValidateIdeaPage() {
   const [ideaData, setIdeaData] = useState(null);
+  const [competitorData, setCompetitorData] = useState(null);
 
   return (
     <div className="min-h-screen px-6 pt-6 bg-[#0C0F15]">
@@ -25,7 +26,12 @@ export default function ValidateIdeaPage() {
         </p>
       </section>
 
-      <StartupForm onSubmit={(data) => setIdeaData(data)} />
+      <StartupForm
+  onSubmit={({ swot, competitors }) => {
+    setIdeaData(swot);
+    setCompetitorData(competitors);
+  }}
+/>
 
       {ideaData && (
         <>
@@ -35,6 +41,9 @@ export default function ValidateIdeaPage() {
       )}
       {/*<CompetitorResearch idea={ideaData} />
           <TrendInsights idea={ideaData} />*/}
+      {competitorData && (
+  <CompetitorResearch competitors={competitorData} />
+)}
 
 
     </div>

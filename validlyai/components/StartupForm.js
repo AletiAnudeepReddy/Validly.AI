@@ -23,23 +23,35 @@ export default function StartupForm({ onSubmit }) {
   e.preventDefault();
 
   try {
-    const response = await fetch('/api/swot', {
+    const body = JSON.stringify(formData);
+
+    // SWOT request
+    const swotRes = await fetch('/api/swot', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
+      headers: { 'Content-Type': 'application/json' },
+      body,
     });
 
-    const data = await response.json();
+    const swotData = await swotRes.json();
 
-    if (response.ok) {
-      onSubmit(data); // Send SWOT result to parent (like SWOTAnalysis)
+    // Competitors request
+    const compRes = await fetch('/api/competitors', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body,
+    });
+
+    const compData = await compRes.json();
+
+    if (swotRes.ok && compRes.ok) {
+      // Send BOTH data back to parent via onSubmit
+      onSubmit({ swot: swotData, competitors: compData });
     } else {
-      console.error('SWOT API error:', data.message);
+      console.error('API error:', swotData, compData);
     }
-  } catch (error) {
-    console.error('Network error:', error);
+
+  } catch (err) {
+    console.error('Network error:', err);
   }
 };
 
