@@ -19,25 +19,22 @@ export default function ValidateIdeaPage() {
           🚀 Validate <span className='text-[#12EAB5]'>Your Startup</span> Idea
         </h1>
         <p data-aos="zoom-in"
-                data-aos-delay="200" className="text-md text-gray-300">
+          data-aos-delay="200" className="text-md text-gray-300">
           Get instant SWOT, Competitor Research, and Market Trends backed by AI
         </p>
       </section>
 
       <StartupForm onSubmit={(data) => setIdeaData(data)} />
-      <SWOTAnalysis/>
-      <CompetitorResearch/>
-      <TrendInsights idea={ideaData} />
 
       {ideaData && (
-        {/*<>
+        <>
           <SWOTAnalysis idea={ideaData} />
-          <CompetitorResearch idea={ideaData} />
-          <TrendInsights idea={ideaData} />
-        </>*/}
+        </>
       )}
+      {/*<CompetitorResearch idea={ideaData} />
+          <TrendInsights idea={ideaData} />*/}
 
-      {/*<Dashboard />*/}
+
     </div>
   );
 }

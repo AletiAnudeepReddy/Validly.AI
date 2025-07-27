@@ -19,10 +19,30 @@ export default function StartupForm({ onSubmit }) {
         }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onSubmit(formData);
-    };
+    const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch('/api/swot', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+      onSubmit(data); // Send SWOT result to parent (like SWOTAnalysis)
+    } else {
+      console.error('SWOT API error:', data.message);
+    }
+  } catch (error) {
+    console.error('Network error:', error);
+  }
+};
+
 
     const inputClass =
         'w-full p-2 bg-[#10151D] border-[1.5px] border-[#1E2A37] text-gray-400 placeholder-gray-500 rounded-md focus:outline-none focus:ring-[0.1px] focus:ring-[#12EAB5] focus:border-[#12EAB5] text-sm';
