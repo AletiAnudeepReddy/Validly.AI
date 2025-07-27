@@ -6,6 +6,7 @@ import StartupForm from '@/components/StartupForm';
 import SWOTAnalysis from '@/components/SWOTAnalysis';
 import CompetitorResearch from '@/components/CompetitorResearch';
 import TrendInsights from '@/components/TrendInsights';
+import SWOTCharts from '@/components/SWOTCharts';
 //import Dashboard from '@/components/Dashboard';
 
 export default function ValidateIdeaPage() {
@@ -29,6 +30,7 @@ export default function ValidateIdeaPage() {
       {ideaData && (
         <>
           <SWOTAnalysis idea={ideaData} />
+          <SWOTCharts idea={ideaData} />
         </>
       )}
       {/*<CompetitorResearch idea={ideaData} />
