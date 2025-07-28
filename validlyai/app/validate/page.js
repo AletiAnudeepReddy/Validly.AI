@@ -31,7 +31,7 @@ export default function ValidateIdeaPage() {
     setIdeaData(swot);
     setCompetitorData(competitors);
   }}
-/>
+/> <TrendInsights/>
 
       {ideaData && (
         <>
