@@ -12,12 +12,14 @@ import SWOTCharts from '@/components/SWOTCharts';
 export default function ValidateIdeaPage() {
   const [ideaData, setIdeaData] = useState(null);
   const [competitorData, setCompetitorData] = useState(null);
+  const [trendData, setTrendData] = useState(null);
+
 
   return (
     <div className="min-h-screen px-6 pt-6 bg-[#0C0F15]">
       <section className="text-center mb-6">
         <h1 data-aos="zoom-out"
-                data-aos-delay="200" className="text-2xl font-bold  mb-2 text-white">
+          data-aos-delay="200" className="text-2xl font-bold  mb-2 text-white">
           🚀 Validate <span className='text-[#12EAB5]'>Your Startup</span> Idea
         </h1>
         <p data-aos="zoom-in"
@@ -27,11 +29,12 @@ export default function ValidateIdeaPage() {
       </section>
 
       <StartupForm
-  onSubmit={({ swot, competitors }) => {
-    setIdeaData(swot);
-    setCompetitorData(competitors);
-  }}
-/> <TrendInsights/>
+        onSubmit={({ swot, competitors, trend }) => {
+          setIdeaData(swot);
+          setCompetitorData(competitors);
+          setTrendData(trend);
+        }}
+      />
 
       {ideaData && (
         <>
@@ -42,8 +45,11 @@ export default function ValidateIdeaPage() {
       {/*<CompetitorResearch idea={ideaData} />
           <TrendInsights idea={ideaData} />*/}
       {competitorData && (
-  <CompetitorResearch competitors={competitorData} />
-)}
+        <CompetitorResearch competitors={competitorData} />
+      )}
+      {trendData && (
+        <TrendInsights trend={trendData} />
+      )}
 
 
     </div>

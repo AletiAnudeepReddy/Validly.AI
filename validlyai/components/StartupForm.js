@@ -20,40 +20,49 @@ export default function StartupForm({ onSubmit }) {
     };
 
     const handleSubmit = async (e) => {
-  e.preventDefault();
+        e.preventDefault();
 
-  try {
-    const body = JSON.stringify(formData);
+        try {
+            const body = JSON.stringify(formData);
 
-    // SWOT request
-    const swotRes = await fetch('/api/swot', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body,
-    });
+            // SWOT request
+            const swotRes = await fetch('/api/swot', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body,
+            });
 
-    const swotData = await swotRes.json();
+            const swotData = await swotRes.json();
 
-    // Competitors request
-    const compRes = await fetch('/api/competitors', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body,
-    });
+            // Competitors request
+            const compRes = await fetch('/api/competitors', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body,
+            });
+            const trendRes = await fetch('http://localhost:5000/analyze', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body,
+            });
 
-    const compData = await compRes.json();
+            const trendData = await trendRes.json();
+            console.log(trendData);
 
-    if (swotRes.ok && compRes.ok) {
-      // Send BOTH data back to parent via onSubmit
-      onSubmit({ swot: swotData, competitors: compData });
-    } else {
-      console.error('API error:', swotData, compData);
-    }
+            const compData = await compRes.json();
 
-  } catch (err) {
-    console.error('Network error:', err);
-  }
-};
+            if (swotRes.ok && compRes.ok) {
+                // Send BOTH data back to parent via onSubmit
+                onSubmit({ swot: swotData, competitors: compData, trend: trendData }); // ✅
+
+            } else {
+                console.error('API error:', swotData, compData);
+            }
+
+        } catch (err) {
+            console.error('Network error:', err);
+        }
+    };
 
 
     const inputClass =
@@ -68,11 +77,11 @@ export default function StartupForm({ onSubmit }) {
                 <div className="space-y-3">
                     <div>
                         <label data-aos="fade-right"
-                data-aos-delay="200" className={labelClass}>
+                            data-aos-delay="200" className={labelClass}>
                             <Lightbulb className="w-4 h-4 text-[#12EAB5]" /> Startup Name
                         </label>
                         <input data-aos="zoom-in"
-                data-aos-delay="200"
+                            data-aos-delay="200"
                             type="text"
                             name="name"
                             required
@@ -85,12 +94,12 @@ export default function StartupForm({ onSubmit }) {
 
                     <div>
                         <label data-aos="fade-right"
-                data-aos-delay="300" className={labelClass}>
+                            data-aos-delay="300" className={labelClass}>
                             <Info className="w-4 h-4 text-[#12EAB5]" /> One-liner Description
                         </label>
                         <input
-                        data-aos="zoom-in"
-                data-aos-delay="300"
+                            data-aos="zoom-in"
+                            data-aos-delay="300"
                             type="text"
                             name="description"
                             required
@@ -103,11 +112,11 @@ export default function StartupForm({ onSubmit }) {
 
                     <div>
                         <label data-aos="fade-right"
-                data-aos-delay="400" className={labelClass}>
+                            data-aos-delay="400" className={labelClass}>
                             <Users className="w-4 h-4 text-[#12EAB5]" /> Target Audience
                         </label>
                         <input data-aos="zoom-in"
-                data-aos-delay="400"
+                            data-aos-delay="400"
                             type="text"
                             name="audience"
                             required
@@ -123,11 +132,11 @@ export default function StartupForm({ onSubmit }) {
                 <div className="space-y-3">
                     <div>
                         <label data-aos="fade-right"
-                data-aos-delay="450" className={labelClass}>
+                            data-aos-delay="450" className={labelClass}>
                             <AlertCircle className="w-4 h-4 text-[#12EAB5]" /> Problem It Solves
                         </label>
                         <textarea data-aos="zoom-in"
-                data-aos-delay="450"
+                            data-aos-delay="450"
                             name="problem"
                             required
                             value={formData.problem}
@@ -140,11 +149,11 @@ export default function StartupForm({ onSubmit }) {
 
                     <div>
                         <label data-aos="fade-right"
-                data-aos-delay="550" className={labelClass}>
+                            data-aos-delay="550" className={labelClass}>
                             <Star className="w-4 h-4 text-[#12EAB5]" /> Key Features
                         </label>
                         <textarea data-aos="zoom-in"
-                data-aos-delay="550"
+                            data-aos-delay="550"
                             name="features"
                             required
                             value={formData.features}
@@ -160,7 +169,7 @@ export default function StartupForm({ onSubmit }) {
 
 
                     <button data-aos="fade-down"
-                data-aos-delay="200"
+                        data-aos-delay="200"
                         type="submit"
                         className="w-full flex items-center justify-center gap-2 py-2 text-sm bg-gradient-to-r from-[#12EAB5] to-[#0EDDB8] text-black rounded-2xl hover:scale-102 transition duration-200 font-semibold shadow-md hover:shadow-lg"
                     >
