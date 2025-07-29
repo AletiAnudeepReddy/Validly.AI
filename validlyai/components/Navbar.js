@@ -84,7 +84,19 @@ export default function Navbar() {
               <button onClick={() => handleClick("swot")} data-aos="fade-right" data-aos-delay="300" className="hover:text-[#12EAB5] hover:scale-105 transition">SWOT</button>
               <button onClick={() => handleClick("competitors")} data-aos="fade-right" data-aos-delay="250" className="hover:text-[#12EAB5] hover:scale-105 transition">Competitors</button>
               <button onClick={() => handleClick("insights")} data-aos="fade-right" data-aos-delay="200" className="hover:text-[#12EAB5] hover:scale-105 transition">Insights</button>
-              <button data-aos="fade-right" data-aos-delay="150" className="hover:text-[#12EAB5] hover:scale-105 transition">Dashboard</button>
+              {session?.user?.email && (
+                <button
+                  onClick={() => {
+                    const username = session.user.email.split('@')[0];
+                    router.push(`/${username}`);
+                  }}
+                  data-aos="fade-right"
+                  data-aos-delay="150"
+                  className="hover:text-[#12EAB5] hover:scale-105 transition"
+                >
+                  Dashboard
+                </button>
+              )}
               <button
                 data-aos="fade-right"
                 data-aos-delay="100"

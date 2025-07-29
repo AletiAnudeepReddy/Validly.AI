@@ -6,9 +6,8 @@ import Link from 'next/link';
 import { FaRocket, FaChartPie, FaRegLightbulb } from 'react-icons/fa';
 import { IoAnalyticsSharp } from 'react-icons/io5';
 
-export default function DashboardPage() {
-  const params = useParams();
-  const username = params.username;
+export default function DashboardPage({ params }) {
+  const { username } = params;
 
   const [recentIdeas, setRecentIdeas] = useState([]);
 

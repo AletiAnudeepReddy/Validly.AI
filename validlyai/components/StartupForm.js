@@ -76,7 +76,7 @@ export default function StartupForm({ onSubmit }) {
     const labelClass = 'block mb-3 font-medium text-gray-300 flex items-center gap-2';
 
     return (
-        <div className="max-w-5xl mx-auto mb-20 bg-[#0C0F15] rounded-xl p-6 border shadow-[0_0_20px_#12EAB540] border-[#1E2A37] h-[50vh] overflow-y-auto text-sm">
+        <div className="max-w-5xl mx-auto mt-10 mb-20 bg-[#0C0F15] rounded-xl p-6 border shadow-[0_0_20px_#12EAB540] border-[#1E2A37] h-[50vh] overflow-y-auto text-sm">
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Left Column */}
                 <div className="space-y-3">
