@@ -40,14 +40,14 @@ export default function StartupForm({ onSubmit }) {
                 headers: { 'Content-Type': 'application/json' },
                 body,
             });
-            const trendRes = await fetch('http://localhost:5000/analyze', {
+            {/*const trendRes = await fetch('http://localhost:5000/analyze', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body,
             });
 
             const trendData = await trendRes.json();
-            console.log(trendData);
+            console.log(trendData);*/}
 
             const compData = await compRes.json();
 

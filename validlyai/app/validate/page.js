@@ -12,7 +12,7 @@ import SWOTCharts from '@/components/SWOTCharts';
 export default function ValidateIdeaPage() {
   const [ideaData, setIdeaData] = useState(null);
   const [competitorData, setCompetitorData] = useState(null);
-  const [trendData, setTrendData] = useState(null);
+  //const [trendData, setTrendData] = useState(null);
 
 
   return (
@@ -32,7 +32,7 @@ export default function ValidateIdeaPage() {
         onSubmit={({ swot, competitors, trend }) => {
           setIdeaData(swot);
           setCompetitorData(competitors);
-          setTrendData(trend);
+          //setTrendData(trend);
         }}
       />
 
@@ -44,12 +44,14 @@ export default function ValidateIdeaPage() {
       )}
       {/*<CompetitorResearch idea={ideaData} />
           <TrendInsights idea={ideaData} />*/}
-      {competitorData && (
+      {competitorData && (<>
         <CompetitorResearch competitors={competitorData} />
+        <TrendInsights/>
+        </>
       )}
-      {trendData && (
+      {/*{trendData && (
         <TrendInsights trend={trendData} />
-      )}
+      )}*/}
 
 
     </div>
