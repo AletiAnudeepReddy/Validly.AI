@@ -182,7 +182,7 @@ export default function MarketTrends() {
           {/* --- Pie Chart --- */}
           <div className="flex-1 bg-[#10151D] p-6 rounded-2xl shadow-lg flex flex-col items-center justify-center">
             <h3 className="text-2xl text-[#12EAB5] mb-4 font-semibold text-center">
-              🥧 Keyword Share
+              🥧 Insights
             </h3>
             <div className="w-full flex items-center justify-center h-[300px]">
               <Pie data={pieChartData} options={pieOptions} />

@@ -53,7 +53,7 @@ export default function StartupForm({ onSubmit }) {
 
             if (swotRes.ok && compRes.ok) {
                 // Send BOTH data back to parent via onSubmit
-                onSubmit({ swot: swotData, competitors: compData, trend: trendData }); // ✅
+                onSubmit({ swot: swotData, competitors: compData }); // ✅
 
             } else {
                 console.error('API error:', swotData, compData);
@@ -68,10 +68,10 @@ export default function StartupForm({ onSubmit }) {
     const inputClass =
         'w-full p-2 bg-[#10151D] border-[1.5px] border-[#1E2A37] text-gray-400 placeholder-gray-500 rounded-md focus:outline-none focus:ring-[0.1px] focus:ring-[#12EAB5] focus:border-[#12EAB5] text-sm';
 
-    const labelClass = 'block mb-1 font-medium text-gray-300 flex items-center gap-2';
+    const labelClass = 'block mb-3 font-medium text-gray-300 flex items-center gap-2';
 
     return (
-        <div className="max-w-5xl mx-auto bg-[#0C0F15] shadow-md rounded-xl p-6 border-2 border-[#1E2A37] h-[46vh] overflow-y-auto text-sm">
+        <div className="max-w-5xl mx-auto mb-20 bg-[#0C0F15] rounded-xl p-6 border shadow-[0_0_20px_#12EAB540] border-[#1E2A37] h-[50vh] overflow-y-auto text-sm">
             <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {/* Left Column */}
                 <div className="space-y-3">

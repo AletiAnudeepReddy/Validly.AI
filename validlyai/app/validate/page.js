@@ -29,7 +29,7 @@ export default function ValidateIdeaPage() {
       </section>
 
       <StartupForm
-        onSubmit={({ swot, competitors, trend }) => {
+        onSubmit={({ swot, competitors }) => {
           setIdeaData(swot);
           setCompetitorData(competitors);
           //setTrendData(trend);
