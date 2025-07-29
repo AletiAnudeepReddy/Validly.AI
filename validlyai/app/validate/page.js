@@ -1,7 +1,9 @@
 // app/validate-idea/page.tsx or page.jsx
 
 'use client';
-import { useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import { useScroll } from '@/contex/ScrollContext';
+
 import StartupForm from '@/components/StartupForm';
 import SWOTAnalysis from '@/components/SWOTAnalysis';
 import CompetitorResearch from '@/components/CompetitorResearch';
@@ -10,8 +12,19 @@ import SWOTCharts from '@/components/SWOTCharts';
 //import Dashboard from '@/components/Dashboard';
 
 export default function ValidateIdeaPage() {
+  const { setScrollTo } = useScroll();
+  const swotRef = useRef(null);
+  const compRef = useRef(null);
+  const insightsRef = useRef(null);
   const [ideaData, setIdeaData] = useState(null);
   const [competitorData, setCompetitorData] = useState(null);
+  useEffect(() => {
+    setScrollTo({
+      swot: () => swotRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+      competitors: () => compRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+      insights: () => insightsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+    });
+  }, [setScrollTo]);
   //const [trendData, setTrendData] = useState(null);
 
 
@@ -37,18 +50,22 @@ export default function ValidateIdeaPage() {
       />
 
       {ideaData && (
-        <>
+        <div ref={swotRef}>
+        
           <SWOTAnalysis idea={ideaData} />
           <SWOTCharts idea={ideaData} />
-        </>
+        </div>
       )}
       {/*<CompetitorResearch idea={ideaData} />
           <TrendInsights idea={ideaData} />*/}
-      {competitorData && (<>
-        <CompetitorResearch competitors={competitorData} />
-        <TrendInsights/>
-        </>
-      )}
+      {competitorData && (
+          <div ref={compRef} className="pt-2">
+            <CompetitorResearch competitors={competitorData} />
+            <div ref={insightsRef} className="pt-2">
+              <TrendInsights />
+            </div>
+          </div>
+        )}
       {/*{trendData && (
         <TrendInsights trend={trendData} />
       )}*/}

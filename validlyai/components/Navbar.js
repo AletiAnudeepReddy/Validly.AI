@@ -5,8 +5,20 @@ import AuthModal from "@/components/AuthModal";
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useScroll } from "@/contex/ScrollContext";
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const { scrollTo } = useScroll();
+
+  const handleClick = (target) => {
+    if (pathname === "/validate" && scrollTo[target]) {
+      scrollTo[target](); // Trigger the scroll
+    } else {
+      // Optional: redirect or do nothing
+    }
+  };
   const router = useRouter();
   const { data: session } = useSession();
   const isLoggedIn = !!session;
@@ -69,9 +81,9 @@ export default function Navbar() {
             </>
           ) : (
             <>
-              <button data-aos="fade-right" data-aos-delay="300" className="hover:text-[#12EAB5] hover:scale-105 transition">SWOT</button>
-              <button data-aos="fade-right" data-aos-delay="250" className="hover:text-[#12EAB5] hover:scale-105 transition">Competitors</button>
-              <button data-aos="fade-right" data-aos-delay="200" className="hover:text-[#12EAB5] hover:scale-105 transition">Insights</button>
+              <button onClick={() => handleClick("swot")} data-aos="fade-right" data-aos-delay="300" className="hover:text-[#12EAB5] hover:scale-105 transition">SWOT</button>
+              <button onClick={() => handleClick("competitors")} data-aos="fade-right" data-aos-delay="250" className="hover:text-[#12EAB5] hover:scale-105 transition">Competitors</button>
+              <button onClick={() => handleClick("insights")} data-aos="fade-right" data-aos-delay="200" className="hover:text-[#12EAB5] hover:scale-105 transition">Insights</button>
               <button data-aos="fade-right" data-aos-delay="150" className="hover:text-[#12EAB5] hover:scale-105 transition">Dashboard</button>
               <button
                 data-aos="fade-right"

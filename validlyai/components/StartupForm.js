@@ -4,6 +4,8 @@ import { Lightbulb, Info, Users, AlertCircle, Star } from 'lucide-react';
 import { Rocket } from "lucide-react";
 
 export default function StartupForm({ onSubmit }) {
+    const [loading, setLoading] = useState(false);
+
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -21,9 +23,10 @@ export default function StartupForm({ onSubmit }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        setLoading(true);
         try {
             const body = JSON.stringify(formData);
+            
 
             // SWOT request
             const swotRes = await fetch('/api/swot', {
@@ -61,7 +64,9 @@ export default function StartupForm({ onSubmit }) {
 
         } catch (err) {
             console.error('Network error:', err);
-        }
+        }finally {
+        setLoading(false); // stop loading
+    }
     };
 
 
@@ -165,19 +170,25 @@ export default function StartupForm({ onSubmit }) {
                     </div>
                 </div>
 
-                <div className=" col-span-1 md:col-span-2">
+                <div className="col-span-1 md:col-span-2">
+    {loading ? (
+        <div className="w-full flex items-center justify-center py-3">
+            <div className="w-6 h-6 border-2 border-t-transparent border-[#12EAB5] rounded-full animate-spin"></div>
+            <span className="ml-2 text-[#12EAB5] text-sm">Analyzing...</span>
+        </div>
+    ) : (
+        <button
+            data-aos="fade-down"
+            data-aos-delay="200"
+            type="submit"
+            className="w-full flex items-center justify-center gap-2 py-2 text-sm bg-gradient-to-r from-[#12EAB5] to-[#0EDDB8] text-black rounded-2xl hover:scale-102 transition duration-200 font-semibold shadow-md hover:shadow-lg"
+        >
+            <Rocket className="w-4 h-4" />
+            Analyze My Idea
+        </button>
+    )}
+</div>
 
-
-                    <button data-aos="fade-down"
-                        data-aos-delay="200"
-                        type="submit"
-                        className="w-full flex items-center justify-center gap-2 py-2 text-sm bg-gradient-to-r from-[#12EAB5] to-[#0EDDB8] text-black rounded-2xl hover:scale-102 transition duration-200 font-semibold shadow-md hover:shadow-lg"
-                    >
-                        <Rocket className="w-4 h-4" />
-                        Analyze My Idea
-                    </button>
-
-                </div>
             </form>
         </div>
     );
